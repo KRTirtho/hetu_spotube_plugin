@@ -24,6 +24,14 @@ class HetuSpotubePluginLoader {
     }
   }
 
+  /// Loads the bytecode for the Spotube plugin from the Flutter asset bundle.
+  /// Add following to your `pubspec.yaml`:
+  /// 
+  /// ```yaml
+  /// flutter:
+  ///   assets:
+  ///     - packages/hetu_spotube_plugin/assets/bytecode/spotube_plugin.out
+  /// ```
   static Future<void> loadBytecodeFlutter(Hetu hetu) async {
     final byteCodeFile = await rootBundle.load(
       'packages/hetu_spotube_plugin/assets/bytecode/spotube_plugin.out',
