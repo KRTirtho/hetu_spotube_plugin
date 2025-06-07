@@ -1,0 +1,41 @@
+import "module:std" as std
+
+var Stream = std.Stream
+
+external class Cookie {
+  final domain: string
+  final expiresDate: int
+  final isHttpOnly: bool
+  final isSecure: bool
+  final isSessionOnly: bool
+  final name: string
+  final path: string
+  final value: any
+
+  construct ({
+    this.domain,
+    this.expiresDate,
+    this.isHttpOnly,
+    this.isSecure,
+    this.isSessionOnly,
+    this.name,
+    this.path,
+    this.value
+  })
+}
+
+external class Webview {
+  var uri: string
+
+  construct ({
+    this.uri,
+  })
+
+  get onUrlRequestStream -> Stream
+
+  fun open() -> Future
+  fun close() -> Future
+  fun getAllCookies() -> Future
+}
+
+export { Cookie, Webview, WebviewCookieManager }
