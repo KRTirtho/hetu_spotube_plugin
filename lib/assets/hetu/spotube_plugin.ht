@@ -1,1 +1,2 @@
 export 'webview.ht'
+export 'localstorage.ht'

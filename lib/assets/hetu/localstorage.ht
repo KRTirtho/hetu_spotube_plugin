@@ -1,0 +1,22 @@
+external class LocalStorage {
+  static fun getString(key: string) -> Future
+  static fun setString(key: string, value: string) -> Future
+
+  static fun getInt(key: string) -> Future
+  static fun setInt(key: string, value: int) -> Future
+
+  static fun getBool(key: string) -> Future
+  static fun setBool(key: string, value: bool) -> Future
+
+  static fun getDouble(key: string) -> Future
+  static fun setDouble(key: string, value: double) -> Future
+
+  static fun getStringList(key: string) -> Future
+  static fun setStringList(key: string, value: List) -> Future
+
+  static fun remove(key: string) -> Future
+  static fun clear() -> Future
+  static fun containsKey(key: string) -> Future
+}
+
+export { LocalStorage }

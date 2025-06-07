@@ -3,11 +3,16 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:hetu_script/hetu/hetu.dart';
+import 'package:hetu_spotube_plugin/localstorage/localstorage.binding.dart';
+import 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
 import 'package:hetu_spotube_plugin/webview/webview.binding.dart';
+
+export 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
 
 class HetuSpotubePluginLoader {
   static void loadBindings(
     Hetu hetu, {
+    required Localstorage localStorageImpl,
     required FutureOr Function(Widget route) onNavigatorPush,
     required FutureOr<void> Function() onNavigatorPop,
   }) {
@@ -17,6 +22,7 @@ class HetuSpotubePluginLoader {
         onNavigatorPush: onNavigatorPush,
         onNavigatorPop: onNavigatorPop,
       ),
+      LocalStorageClassBinding(localStorageImpl: localStorageImpl),
     ];
 
     for (final classBinding in classes) {
@@ -26,7 +32,7 @@ class HetuSpotubePluginLoader {
 
   /// Loads the bytecode for the Spotube plugin from the Flutter asset bundle.
   /// Add following to your `pubspec.yaml`:
-  /// 
+  ///
   /// ```yaml
   /// flutter:
   ///   assets:
