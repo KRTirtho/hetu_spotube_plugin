@@ -1,6 +1,7 @@
 import "module:std" as std
 
 var Stream = std.Stream
+var StreamSubscription = std.StreamSubscription
 
 external class Cookie {
   final domain: string
