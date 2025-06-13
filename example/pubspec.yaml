@@ -14,7 +14,9 @@ dependencies:
   hetu_spotube_plugin:
     path: ../
   hetu_std:
-    path: ../../hetu_std
+    git:
+      url: https://github.com/hetu-community/hetu_std.git
+      ref: main
   shared_preferences: ^2.5.3
 
 dev_dependencies:

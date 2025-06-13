@@ -243,9 +243,11 @@ packages:
   hetu_std:
     dependency: "direct main"
     description:
-      path: "../../hetu_std"
-      relative: true
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: "15aa06dc3bd0b203b8d90f353a930a9e0c5a861f"
+      url: "https://github.com/hetu-community/hetu_std.git"
+    source: git
     version: "1.0.0"
   http_parser:
     dependency: transitive
