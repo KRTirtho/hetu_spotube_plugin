@@ -7,6 +7,8 @@ import 'package:desktop_webview_window/desktop_webview_window.dart'
 import 'package:flutter/widgets.dart';
 import 'package:hetu_spotube_plugin/webview/webview_page.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Webview {
   final String uri;
@@ -26,7 +28,23 @@ class Webview {
   webview_window.Webview? _webview;
   Future<void> open() async {
     if (Platform.isLinux) {
-      _webview = await WebviewWindow.create();
+      final applicationSupportDir = await getApplicationSupportDirectory();
+      final userDataFolder = Directory(
+        join(applicationSupportDir.path, "webview_window_Webview2"),
+      );
+
+      if (!await userDataFolder.exists()) {
+        await userDataFolder.create();
+      }
+
+      _webview = await WebviewWindow.create(
+        configuration: CreateConfiguration(
+          title: "Spotube Login",
+          windowHeight: 720,
+          windowWidth: 1280,
+          userDataFolderWindows: userDataFolder.path,
+        ),
+      );
       _webview!.setOnUrlRequestCallback((url) {
         _onUrlRequestStreamController?.add(url);
         return true;
