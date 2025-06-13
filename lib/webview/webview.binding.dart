@@ -19,6 +19,9 @@ extension CookieBinding on Cookie {
       "isSecure" => isSecure,
       "isSessionOnly" => isSessionOnly,
       "path" => path,
+      "toJson" => (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) {
+        return toJson();
+      },
       _ => throw HTError.undefined(id),
     };
   }
@@ -42,6 +45,10 @@ class CookieClassBinding extends HTExternalClass {
           path: namedArgs['path'],
         );
       },
+      "Cookie.fromJson" =>
+        (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) {
+          return Cookie.fromMap(positionalArgs[0]);
+        },
       _ => HTError.undefined(varName),
     };
   }
