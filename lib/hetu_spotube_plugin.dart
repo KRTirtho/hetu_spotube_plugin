@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:hetu_script/hetu/hetu.dart';
 import 'package:hetu_spotube_plugin/localstorage/localstorage.binding.dart';
 import 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
+import 'package:hetu_spotube_plugin/timezone/timezone.binding.dart';
 import 'package:hetu_spotube_plugin/webview/webview.binding.dart';
 
 export 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
@@ -23,6 +24,7 @@ class HetuSpotubePluginLoader {
         onNavigatorPop: onNavigatorPop,
       ),
       LocalStorageClassBinding(localStorageImpl: localStorageImpl),
+      TimezoneClassBinding(),
     ];
 
     for (final classBinding in classes) {

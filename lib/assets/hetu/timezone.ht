@@ -1,0 +1,7 @@
+external class Timezone {
+  static fun getLocalTimeZone() -> Future
+  
+  static fun getAvailableTimezones() -> Future
+}
+
+export { Timezone }

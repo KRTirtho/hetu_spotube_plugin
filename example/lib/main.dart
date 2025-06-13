@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:example/localstorage.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -43,7 +41,7 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
-  StreamSubscription? _subscription;
+  var _subscription;
 
   @override
   void initState() {
@@ -78,8 +76,8 @@ class _MyHomeState extends State<MyHome> {
       import 'module:std' as std
       import 'module:spotube_plugin' as spotube
 
-      final { Stream } = std
-      final { Webview, Cookie, LocalStorage } = spotube
+      final { Stream, StreamSubscription } = std
+      final { Webview, Cookie, LocalStorage, Timezone } = spotube
 
       LocalStorage.setBool("test", true).then((_) {
         print("LocalStorage set test: true")
@@ -99,13 +97,13 @@ class _MyHomeState extends State<MyHome> {
         webview.getAllCookies().then((cookies) {
           print("Webview cookies: ${cookies}")
         })
-      })
+      }).cancel
     """);
   }
 
   @override
   void dispose() {
-    _subscription?.cancel();
+    _subscription?.call();
     super.dispose();
   }
 
@@ -122,6 +120,14 @@ class _MyHomeState extends State<MyHome> {
                 await hetu.eval("webview.open()");
               },
               child: Text("Open webview"),
+            ),
+            FilledButton(
+              onPressed: () async {
+                final hetu = getIt.get<Hetu>();
+                final result = await hetu.eval("Timezone.getLocalTimeZone()");
+                debugPrint(result.toString());
+              },
+              child: Text("Get local timezone"),
             ),
           ],
         ),
