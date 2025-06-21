@@ -45,10 +45,14 @@ class CookieClassBinding extends HTExternalClass {
           path: namedArgs['path'],
         );
       },
-      "Cookie.fromJson" =>
-        (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) {
-          return Cookie.fromMap(positionalArgs[0]);
-        },
+      "Cookie.fromJson" => (
+        HTEntity entity, {
+        positionalArgs,
+        namedArgs,
+        typeArgs,
+      }) {
+        return Cookie.fromMap(positionalArgs[0]);
+      },
       _ => HTError.undefined(varName),
     };
   }
@@ -65,9 +69,9 @@ extension WebviewBinding on Webview {
         (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) => open(),
       "close" =>
         (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) => close(),
-      "getAllCookies" =>
+      "getCookies" =>
         (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) =>
-            getAllCookies(),
+            getCookies(positionalArgs[0]),
       "onUrlRequestStream" => std.Stream(onUrlRequestStream),
       _ => throw HTError.undefined(id),
     };

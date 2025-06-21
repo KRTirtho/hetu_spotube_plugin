@@ -40,7 +40,7 @@ external class Webview {
 
   fun open() -> Future
   fun close() -> Future
-  fun getAllCookies() -> Future
+  fun getCookies(url: string) -> Future
 }
 
 export { Cookie, Webview, WebviewCookieManager }

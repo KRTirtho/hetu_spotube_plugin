@@ -74,7 +74,7 @@ class Webview {
     await onNavigatorPop();
   }
 
-  Future<List<Cookie>> getAllCookies() async {
+  Future<List<Cookie>> getCookies(String url) async {
     if (Platform.isLinux) {
       final cookies = await _webview?.getAllCookies() ?? [];
 
@@ -92,6 +92,6 @@ class Webview {
       }).toList();
     }
 
-    return await CookieManager.instance().getAllCookies();
+    return await CookieManager.instance().getCookies(url: WebUri(url));
   }
 }
