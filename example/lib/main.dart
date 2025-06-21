@@ -94,7 +94,7 @@ class _MyHomeState extends State<MyHome> {
       print("Webview created: ${webview.onUrlRequestStream}")
       webview.onUrlRequestStream.listen((url) {
         print("Webview URL request: ${url}")
-        webview.getAllCookies().then((cookies) {
+        webview.getCookies(url).then((cookies) {
           print("Webview cookies: ${cookies}")
         })
       }).cancel
