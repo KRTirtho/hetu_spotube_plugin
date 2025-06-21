@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:hetu_script/binding.dart';
-import 'package:hetu_script/errors.dart';
-import 'package:hetu_script/values.dart';
+import 'package:hetu_script/hetu_script.dart';
 import 'package:hetu_spotube_plugin/webview/webview.dart';
 import 'package:hetu_std/hetu_std.dart' as std;
 
@@ -19,7 +18,12 @@ extension CookieBinding on Cookie {
       "isSecure" => isSecure,
       "isSessionOnly" => isSessionOnly,
       "path" => path,
-      "toJson" => (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) {
+      "toJson" => (
+        HTEntity entity, {
+        List<dynamic> positionalArgs = const [],
+        Map<String, dynamic> namedArgs = const {},
+        List<HTType> typeArgs = const [],
+      }) {
         return toJson();
       },
       _ => throw HTError.undefined(id),
@@ -33,7 +37,12 @@ class CookieClassBinding extends HTExternalClass {
   @override
   dynamic memberGet(String varName, {String? from}) {
     return switch (varName) {
-      "Cookie" => (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) {
+      "Cookie" => (
+        HTEntity entity, {
+        List<dynamic> positionalArgs = const [],
+        Map<String, dynamic> namedArgs = const {},
+        List<HTType> typeArgs = const [],
+      }) {
         return Cookie(
           name: namedArgs['name'],
           value: namedArgs['value'],
@@ -47,9 +56,9 @@ class CookieClassBinding extends HTExternalClass {
       },
       "Cookie.fromJson" => (
         HTEntity entity, {
-        positionalArgs,
-        namedArgs,
-        typeArgs,
+        List<dynamic> positionalArgs = const [],
+        Map<String, dynamic> namedArgs = const {},
+        List<HTType> typeArgs = const [],
       }) {
         return Cookie.fromMap(positionalArgs[0]);
       },
@@ -66,12 +75,26 @@ extension WebviewBinding on Webview {
   dynamic htFetch(String id) {
     return switch (id) {
       "open" =>
-        (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) => open(),
+        (
+          HTEntity entity, {
+          List<dynamic> positionalArgs = const [],
+          Map<String, dynamic> namedArgs = const {},
+          List<HTType> typeArgs = const [],
+        }) => open(),
       "close" =>
-        (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) => close(),
+        (
+          HTEntity entity, {
+          List<dynamic> positionalArgs = const [],
+          Map<String, dynamic> namedArgs = const {},
+          List<HTType> typeArgs = const [],
+        }) => close(),
       "getCookies" =>
-        (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) =>
-            getCookies(positionalArgs[0]),
+        (
+          HTEntity entity, {
+          List<dynamic> positionalArgs = const [],
+          Map<String, dynamic> namedArgs = const {},
+          List<HTType> typeArgs = const [],
+        }) => getCookies(positionalArgs[0]),
       "onUrlRequestStream" => std.Stream(onUrlRequestStream),
       _ => throw HTError.undefined(id),
     };
@@ -91,7 +114,12 @@ class WebviewClassBinding extends HTExternalClass {
   dynamic memberGet(String varName, {String? from}) {
     return switch (varName) {
       "Webview" =>
-        (HTEntity entity, {positionalArgs, namedArgs, typeArgs}) => Webview(
+        (
+          HTEntity entity, {
+          List<dynamic> positionalArgs = const [],
+          Map<String, dynamic> namedArgs = const {},
+          List<HTType> typeArgs = const [],
+        }) => Webview(
           onNavigatorPush: onNavigatorPush,
           onNavigatorPop: onNavigatorPop,
           uri: namedArgs['uri'],
