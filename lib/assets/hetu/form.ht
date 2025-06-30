@@ -1,0 +1,20 @@
+external class SpotubeForm {
+  /// Fields can be,
+  /// - field type: {
+  ///   objectType: "input",
+  ///   id: string,
+  ///   variant: "text" | "password" | "number",
+  ///   placeholder: string | null,
+  ///   defaultValue: string | null,
+  ///   required: bool,
+  ///   regex: string | null,
+  /// }
+  ///
+  /// - text type: {
+  ///   objectType: "text",
+  ///   text: string,
+  /// }
+  static fun show(title: string, fields: List) -> Future
+}
+
+export { SpotubeForm }

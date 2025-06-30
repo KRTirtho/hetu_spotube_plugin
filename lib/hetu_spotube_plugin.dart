@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:hetu_script/hetu/hetu.dart';
+import 'package:hetu_spotube_plugin/form/form.binding.dart';
 import 'package:hetu_spotube_plugin/localstorage/localstorage.binding.dart';
 import 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
 import 'package:hetu_spotube_plugin/timezone/timezone.binding.dart';
@@ -11,11 +12,32 @@ import 'package:hetu_spotube_plugin/webview/webview.binding.dart';
 export 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
 
 class HetuSpotubePluginLoader {
+  /// Parameter [onShowForm]
+  /// Fields can be,
+  /// - field type: {
+  ///   objectType: "input",
+  ///   id: string,
+  ///   variant: "text" | "password" | "number",
+  ///   placeholder: string | null,
+  ///   defaultValue: string | null,
+  ///   required: bool,
+  ///   regex: string | null,
+  /// }
+  ///
+  /// - text type: {
+  ///   objectType: "text",
+  ///   text: string,
+  /// }
   static void loadBindings(
     Hetu hetu, {
     required Localstorage localStorageImpl,
     required FutureOr Function(Widget route) onNavigatorPush,
     required FutureOr<void> Function() onNavigatorPop,
+    required Future<List<Map<String, dynamic>>?> Function(
+      String title,
+      List<Map<String, dynamic>> fields,
+    )
+    onShowForm,
   }) {
     final classes = [
       CookieClassBinding(),
@@ -25,6 +47,7 @@ class HetuSpotubePluginLoader {
       ),
       LocalStorageClassBinding(localStorageImpl: localStorageImpl),
       TimezoneClassBinding(),
+      SpotubeFormClassBinding(onShow: onShowForm),
     ];
 
     for (final classBinding in classes) {

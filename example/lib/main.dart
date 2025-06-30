@@ -70,6 +70,18 @@ class _MyHomeState extends State<MyHome> {
         if (pageContext == null) return;
         Navigator.of(pageContext!).pop();
       },
+      onShowForm: (title, fields) {
+        return Navigator.of(context).push<List<Map<String, dynamic>>>(
+          MaterialPageRoute(
+            builder: (context) {
+              return Scaffold(
+                appBar: AppBar(title: Text(title)),
+                body: Center(child: Text("Form")),
+              );
+            },
+          ),
+        );
+      },
     );
 
     _subscription = hetu.eval(r"""
@@ -77,7 +89,7 @@ class _MyHomeState extends State<MyHome> {
       import 'module:spotube_plugin' as spotube
 
       final { Stream, StreamSubscription } = std
-      final { Webview, Cookie, LocalStorage, Timezone } = spotube
+      final { Webview, Cookie, LocalStorage, Timezone, SpotubeForm } = spotube
 
       LocalStorage.setBool("test", true).then((_) {
         print("LocalStorage set test: true")
@@ -103,7 +115,7 @@ class _MyHomeState extends State<MyHome> {
 
   @override
   void dispose() {
-    _subscription?.call();
+    _subscription?.cancel();
     super.dispose();
   }
 
@@ -128,6 +140,14 @@ class _MyHomeState extends State<MyHome> {
                 debugPrint(result.toString());
               },
               child: Text("Get local timezone"),
+            ),
+            FilledButton(
+              onPressed: () async {
+                final hetu = getIt.get<Hetu>();
+                final result = await hetu.eval(r"SpotubeForm.show('Spotube plugin form', [])");
+                debugPrint(result.toString());
+              },
+              child: Text("Show form"),
             ),
           ],
         ),

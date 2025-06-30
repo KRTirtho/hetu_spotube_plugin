@@ -1,3 +1,4 @@
 export 'webview.ht'
 export 'localstorage.ht'
 export 'timezone.ht'
+export 'form.ht'
