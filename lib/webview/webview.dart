@@ -92,6 +92,10 @@ class Webview {
       }).toList();
     }
 
-    return await CookieManager.instance().getCookies(url: WebUri(url));
+    return await CookieManager.instance(
+      // Created in [WebviewPage]. Custom WebViewEnvironment for Windows otherwise it installs 
+      // in installation directory so permission exception occurs.
+      webViewEnvironment: await webViewEnvironment,
+    ).getCookies(url: WebUri(url));
   }
 }
