@@ -122,6 +122,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  fk_user_agent:
+    dependency: transitive
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "922f9f9eafd8b501da83dca67d56b2887fa8f916"
+      url: "https://github.com/TiffApps/fk_user_agent.git"
+    source: git
+    version: "2.1.1"
   flutter:
     dependency: "direct main"
     description: flutter

@@ -15,6 +15,10 @@ dependencies:
       path: packages/desktop_webview_window
       ref: feat/cookies
       url: https://github.com/KRTirtho/flutter-plugins.git
+  fk_user_agent:
+    git:
+      url: https://github.com/TiffApps/fk_user_agent.git
+      ref: master
   flutter:
     sdk: flutter
   flutter_inappwebview: ^6.1.5
