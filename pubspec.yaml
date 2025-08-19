@@ -29,6 +29,7 @@ dependencies:
       ref: main
   path: ^1.9.1
   path_provider: ^2.1.5
+  random_user_agents: ^1.0.15
     
 dev_dependencies:
   flutter_test:

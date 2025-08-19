@@ -9,6 +9,7 @@ import 'package:hetu_spotube_plugin/webview/webview_page.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:random_user_agents/random_user_agents.dart';
 
 class Webview {
   final String uri;
@@ -38,13 +39,14 @@ class Webview {
       }
 
       _webview = await WebviewWindow.create(
-        configuration: CreateConfiguration(
-          title: "Spotube Login",
-          windowHeight: 720,
-          windowWidth: 1280,
-          userDataFolderWindows: userDataFolder.path,
-        ),
-      );
+          configuration: CreateConfiguration(
+            title: "Spotube Login",
+            windowHeight: 720,
+            windowWidth: 1280,
+            userDataFolderWindows: userDataFolder.path,
+          ),
+        )
+        ..setApplicationUserAgent(RandomUserAgents.random());
       _webview!.setOnUrlRequestCallback((url) {
         _onUrlRequestStreamController?.add(url);
         return true;
@@ -93,7 +95,7 @@ class Webview {
     }
 
     return await CookieManager.instance(
-      // Created in [WebviewPage]. Custom WebViewEnvironment for Windows otherwise it installs 
+      // Created in [WebviewPage]. Custom WebViewEnvironment for Windows otherwise it installs
       // in installation directory so permission exception occurs.
       webViewEnvironment: await webViewEnvironment,
     ).getCookies(url: WebUri(url));
