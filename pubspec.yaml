@@ -13,7 +13,6 @@ dependencies:
   desktop_webview_window:
     git:
       path: packages/desktop_webview_window
-      ref: feat/cookies
       url: https://github.com/KRTirtho/flutter-plugins.git
   fk_user_agent:
     git:
