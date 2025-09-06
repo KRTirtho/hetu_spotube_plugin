@@ -7,8 +7,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:fk_user_agent/fk_user_agent.dart';
 
 Future<String?> getUserAgent() async {
-  await FkUserAgent.init();
-  return FkUserAgent.userAgent;
+  if (Platform.isIOS || Platform.isAndroid) {
+    await FkUserAgent.init();
+    return FkUserAgent.userAgent;
+  }
+  return null;
 }
 
 final webViewEnvironment =
