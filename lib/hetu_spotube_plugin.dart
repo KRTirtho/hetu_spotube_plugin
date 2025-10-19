@@ -8,8 +8,11 @@ import 'package:hetu_spotube_plugin/localstorage/localstorage.binding.dart';
 import 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
 import 'package:hetu_spotube_plugin/timezone/timezone.binding.dart';
 import 'package:hetu_spotube_plugin/webview/webview.binding.dart';
+import 'package:hetu_spotube_plugin/youtube_engine/youtube_engine.binding.dart';
+import 'package:hetu_spotube_plugin/youtube_engine/youtube_engine.dart';
 
 export 'package:hetu_spotube_plugin/localstorage/localstorage.dart';
+export 'package:hetu_spotube_plugin/youtube_engine/youtube_engine.dart';
 
 class HetuSpotubePluginLoader {
   /// Parameter [onShowForm]
@@ -38,6 +41,7 @@ class HetuSpotubePluginLoader {
       List<Map<String, dynamic>> fields,
     )
     onShowForm,
+    required YouTubeEngine Function() createYoutubeEngine,
   }) {
     final classes = [
       CookieClassBinding(),
@@ -48,6 +52,7 @@ class HetuSpotubePluginLoader {
       LocalStorageClassBinding(localStorageImpl: localStorageImpl),
       TimezoneClassBinding(),
       SpotubeFormClassBinding(onShow: onShowForm),
+      YouTubeEngineClassBinding(createYoutubeEngine: createYoutubeEngine),
     ];
 
     for (final classBinding in classes) {

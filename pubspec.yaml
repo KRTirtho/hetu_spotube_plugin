@@ -1,7 +1,7 @@
 name: hetu_spotube_plugin
 description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+version: 0.0.2
+homepage: https://github.com/KRTirtho/hetu_spotube_plugin
 
 publish_to: none
 
@@ -40,7 +40,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
-flutter:
+# flutter:
 
   # To add assets to your package, add an assets section, like this:
   # assets:

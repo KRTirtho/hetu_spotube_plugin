@@ -18,6 +18,8 @@ dependencies:
       url: https://github.com/hetu-community/hetu_std.git
       ref: main
   shared_preferences: ^2.5.3
+  youtube_explode_dart:
+    git: https://github.com/Coronon/youtube_explode_dart
 
 dev_dependencies:
   flutter_test:

@@ -1,0 +1,9 @@
+external class YouTubeEngine {
+  construct ()
+  
+  fun search(query: string) -> Future<List<Map>>
+  fun getVideo(videoId: string) -> Future<Map>
+  fun streamManifest(videoId: string) -> Future<List<Map>>
+}
+
+export { YouTubeEngine }

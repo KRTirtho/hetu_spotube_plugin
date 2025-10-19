@@ -1,4 +1,5 @@
 import 'package:example/localstorage.dart';
+import 'package:example/youtube.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hetu_script/hetu_script.dart';
@@ -82,6 +83,14 @@ class _MyHomeState extends State<MyHome> {
           ),
         );
       },
+      createYoutubeEngine: () {
+        final ytEngine = YouTubeExplodeEngine();
+        return YouTubeEngine(
+          search: ytEngine.search,
+          getVideo: ytEngine.getVideo,
+          streamManifest: ytEngine.streamManifest,
+        );
+      },
     );
 
     _subscription = hetu.eval(r"""
@@ -89,27 +98,32 @@ class _MyHomeState extends State<MyHome> {
       import 'module:spotube_plugin' as spotube
 
       final { Stream, StreamSubscription } = std
-      final { Webview, Cookie, LocalStorage, Timezone, SpotubeForm } = spotube
+      final { Webview, Cookie, LocalStorage, Timezone, SpotubeForm, YouTubeEngine } = spotube
 
-      LocalStorage.setBool("test", true).then((_) {
-        print("LocalStorage set test: true")
+      // LocalStorage.setBool("test", true).then((_) {
+      //   print("LocalStorage set test: true")
 
-        LocalStorage.getBool("test").then((value) {
-          print("LocalStorage get test: ${value}")
-        })
-      })
+      //   LocalStorage.getBool("test").then((value) {
+      //     print("LocalStorage get test: ${value}")
+      //   })
+      // })
       
 
-      final webview = Webview(
-        uri: "https://google.com",
-      )
-      print("Webview created: ${webview.onUrlRequestStream}")
-      webview.onUrlRequestStream.listen((url) {
-        print("Webview URL request: ${url}")
-        webview.getCookies(url).then((cookies) {
-          print("Webview cookies: ${cookies}")
-        })
-      }).cancel
+      // final webview = Webview(
+      //   uri: "https://google.com",
+      // )
+      // print("Webview created: ${webview.onUrlRequestStream}")
+      // webview.onUrlRequestStream.listen((url) {
+      //   print("Webview URL request: ${url}")
+      //   webview.getCookies(url).then((cookies) {
+      //     print("Webview cookies: ${cookies}")
+      //   })
+      // }).cancel
+
+      // final ytEngine = YouTubeEngine()
+      // ytEngine.streamManifest("yJvNUXmL-PU").then((results) {
+      //   print("YouTube stream manifest results: ${results}")
+      // })
     """);
   }
 
@@ -144,7 +158,9 @@ class _MyHomeState extends State<MyHome> {
             FilledButton(
               onPressed: () async {
                 final hetu = getIt.get<Hetu>();
-                final result = await hetu.eval(r"SpotubeForm.show('Spotube plugin form', [])");
+                final result = await hetu.eval(
+                  r"SpotubeForm.show('Spotube plugin form', [])",
+                );
                 debugPrint(result.toString());
               },
               child: Text("Show form"),
